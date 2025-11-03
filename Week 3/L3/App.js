@@ -19,7 +19,7 @@ const InputBox = ({label, onChangeText})=> {
 const L3 = ()=> {
     const [userType, setUserType] = useState('Admin');
     const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('Test');
 
     const handleLoginPress = () => {
         let myMessage = `Welcome ${userType} ${userName}`;
@@ -51,6 +51,7 @@ const L3 = ()=> {
             >
                 <Text style={styles.buttonText}>LOG IN</Text>
             </TouchableOpacity>
+            <Text>{password}</Text>
             <StatusBar translucent={false} backgroundColor="#fff" barStyle="dark-content" />
         </View>
     );
