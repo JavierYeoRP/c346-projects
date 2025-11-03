@@ -1,3 +1,4 @@
+import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import { View, Text, TextInput, TouchableOpacity, ToastAndroid, StyleSheet, } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
@@ -27,6 +28,7 @@ const L3 = ()=> {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent={false} backgroundColor="#fff" barStyle="dark-content" />
             <Text>User Type:</Text>
             <Picker 
                 selectedValue={userType}
@@ -50,7 +52,6 @@ const L3 = ()=> {
             >
                 <Text style={styles.buttonText}>LOG IN</Text>
             </TouchableOpacity>
-        
         </View>
     );
 };
