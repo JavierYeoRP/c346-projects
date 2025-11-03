@@ -5,17 +5,30 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const QUIZ_DATA = [ 
   { id: 1,
-  image: require('./img/elephant.jpg'), 
-  correctAnswer: "Elephant", 
-  options: ["Rhinoceros", "Elephant", "Hippo"] }, 
+    image: require('./img/Lewis_Hamilton.jpg'), 
+    correctAnswer: "Lewis Hamilton", 
+    options: ["Lewis Hamilton", "Sebastian Vettel", "Fernando Alonso", "Max Verstappen"] 
+  }, 
   { id: 2,
-    image: require('./img/lion.jpg'), 
-    correctAnswer: "Lion", 
-    options: ["Tiger", "Leopard", "Lion"] }, 
+    image: require('./img/Max_Verstappen.jpg'), 
+    correctAnswer: "Max Verstappen", 
+    options: ["Max Verstappen", "Charles Leclerc", "Jenson Button", "Pierre Gasly"] 
+  }, 
   { id: 3, 
-    image: require('./img/giraffe.jpg'), 
-    correctAnswer: "Giraffe", 
-    options: ["Giraffe", "Moose", "Ostrich"] }, 
+    image: require('./img/Pierre_Gasly.jpg'), 
+    correctAnswer: "Pierre Gasly", 
+    options: ["Pierre Gasly", "Nico Rosberg", "Carlos Sainz", "Kimi Antonelli"] 
+  }, 
+  { id: 4, 
+    image: require('./img/Kimi_Antonelli.jpg'), 
+    correctAnswer: "Kimi Antonelli", 
+    options: ["Kimi Antonelli", "Michael Schumacher", "George Russell", "Lewis Hamilton"] 
+  }, 
+  { id: 5, 
+    image: require('./img/Nico_Rosberg.jpg'), 
+    correctAnswer: "Nico Rosberg", 
+    options: ["Nico Rosberg", "Valtteri Bottas", "Max Verstappen", "Pierre Gasly"] 
+  }, 
 ]; 
 
 const QuestionItem = ({ questionData, selectedValue, onAnswerChange }) => {
@@ -26,13 +39,13 @@ const QuestionItem = ({ questionData, selectedValue, onAnswerChange }) => {
         style={styles.image}
         resizeMode="cover"
       />
-      <Text style={styles.promptText}>What animal is this?</Text>
+      <Text style={styles.promptText}>Which F1 driver is this?</Text>
       <Picker
         selectedValue={selectedValue}
         onValueChange={onAnswerChange}
         style={styles.picker}
       >
-        <Picker.Item label="Select an animal..." value="" />
+        <Picker.Item label="Select a driver..." value="" />
         {questionData.options.map((option, index) => (
           <Picker.Item key={index} label={option} value={option} />
         ))}
@@ -41,28 +54,29 @@ const QuestionItem = ({ questionData, selectedValue, onAnswerChange }) => {
   );
 };
 
-
 const QuizApp = () => {
-  const [answer1, setAnswer1] = useState('');
-  const [answer2, setAnswer2] = useState('');
-  const [answer3, setAnswer3] = useState('');
-  const userAnswers = [answer1, answer2, answer3];
-  const setAnswers = [setAnswer1, setAnswer2, setAnswer3];
+  const [answers, setAnswers] = useState(Array(QUIZ_DATA.length).fill(''));
+
+  const handleAnswerChange = (index, value) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = value;
+    setAnswers(updatedAnswers);
+  };
 
   const handleSubmit = () => {
     let score = 0;
     for (let i = 0; i < QUIZ_DATA.length; i++) {
-      if (userAnswers[i] === QUIZ_DATA[i].correctAnswer) {
+      if (answers[i] === QUIZ_DATA[i].correctAnswer) {
         score++;
       }
     }
     let feedbackMessage = '';
     if (score === QUIZ_DATA.length) {
-      feedbackMessage = "Well done! You scored perfectly!";
-    } else if (score >= 1) {
-      feedbackMessage = `Not bad! You scored ${score} out of ${QUIZ_DATA.length} correct answers.`;
+      feedbackMessage = "Perfect lap! You nailed every driver!";
+    } else if (score >= 3) {
+      feedbackMessage = `Solid drive! You scored ${score} out of ${QUIZ_DATA.length}.`;
     } else {
-      feedbackMessage = `You can do better next time. You scored ${score} out of ${QUIZ_DATA.length}.`;
+      feedbackMessage = `Time for a pit stop! You scored ${score} out of ${QUIZ_DATA.length}.`;
     }
     Alert.alert("Quiz Results", feedbackMessage);
   };
@@ -75,16 +89,16 @@ const QuizApp = () => {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.titleContainer}>
-          <FontAwesome6 name="magnifying-glass" size={26} color="#505051ff" style={styles.icon} />
-          <Text style={styles.title}>Animal Identification Quiz</Text>
+          <FontAwesome6 name="flag-checkered" size={26} color="#000000ff" style={styles.icon} />
+          <Text style={styles.title}>F1 Driver Identification Quiz</Text>
         </View>
 
         {QUIZ_DATA.map((data, index) => (
           <QuestionItem
             key={data.id}
             questionData={data}
-            selectedValue={userAnswers[index]}
-            onAnswerChange={setAnswers[index]}
+            selectedValue={answers[index]}
+            onAnswerChange={(value) => handleAnswerChange(index, value)}
           />
         ))}
 
@@ -118,7 +132,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   submitButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FF1E00',
     padding: 15,
     borderRadius: 0,
     alignItems: 'center',
@@ -131,20 +145,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   titleContainer: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  marginBottom: 20,
-},
-icon: {
-  marginRight: 10,
-},
-title: {
-  fontSize: 24,
-  fontWeight: 'bold',
-  textAlign: 'left',
-},
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: 20,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  flexContainer: {
+    flex: 1,
+  },
+  scrollContent: {
+    padding: 20,
+  },
 });
 
-
-export default QuizApp;
+export default QuizApp; 
