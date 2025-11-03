@@ -19,7 +19,7 @@ const InputBox = ({label, onChangeText})=> {
 const L3 = ()=> {
     const [userType, setUserType] = useState('Admin');
     const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('Test');
+    const [password, setPassword] = useState('');
 
     const handleLoginPress = () => {
         let myMessage = `Welcome ${userType} ${userName}`;
@@ -46,7 +46,14 @@ const L3 = ()=> {
                 onChangeText={(text) => setPassword(text)}
             />
             <TouchableOpacity 
-                onPress={handleLoginPress}
+                onPress={() => {
+                    const correctPassword = '123';
+                    let myMessage = 'Error! Wrong Password!';
+                    if (password === correctPassword) {
+                        myMessage = 'Welcome ' + userType + ' ' + userName;
+                    }
+                    ToastAndroid.show(myMessage, ToastAndroid.SHORT);
+                }}
                 style={styles.button}
             >
                 <Text style={styles.buttonText}>LOG IN</Text>
