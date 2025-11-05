@@ -1,7 +1,7 @@
 {
   "name": "animalquiz",
   "version": "1.0.0",
-  "main": "App.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,8 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-picker/picker": "2.11.1",
-    "expo": "54.0.22",
+    "@react-native-picker/picker": "^2.11.4",
+    "expo": "~54.0.22",
     "expo-status-bar": "~3.0.8",
     "react": "19.1.0",
     "react-native": "0.81.5"
