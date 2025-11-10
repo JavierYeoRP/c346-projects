@@ -3,9 +3,8 @@ import { Text, View, StyleSheet } from 'react-native';
 
 const App = () => (
   <View style={styles.container}>
-    <Text style={styles.title}>We are RP</Text>
     <View style={styles.greenBox}>
-      <Text style={styles.boxText}>Who We Are</Text>
+      <Text style={[styles.title, styles.boxText]}>Who We Are</Text>
     </View>
     <View style={styles.greenBox}>
       <Text style={styles.boxText}>Our People</Text>
@@ -18,7 +17,6 @@ const App = () => (
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     padding: 5,
     alignItems: 'left',
   },

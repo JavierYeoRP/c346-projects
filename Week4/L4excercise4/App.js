@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginTop: 30,                 
     flex: 1,
     flexDirection: 'row',          
-    justifyContent: 'center',      
+    justifyContent: 'space-around',      
     alignItems: 'center',         
   },
   Child: {
