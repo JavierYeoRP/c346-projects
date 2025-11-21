@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import { Picker } from '@react-native-picker/picker';
 import { datasource } from './Data.js';
 
 const Add = ({ navigation }) => {
@@ -16,15 +16,15 @@ const Add = ({ navigation }) => {
         value={letter}
         onChangeText={setLetter}
       />
-      <RNPickerSelect
-        onValueChange={setType}
-        value={type}
-        items={[
-          { label: 'Vowels', value: 'Vowels' },
-          { label: 'Consonants', value: 'Consonants' }
-        ]}
-        style={pickerSelectStyles}
-      />
+
+      <Picker
+        selectedValue={type}
+        onValueChange={(itemValue) => setType(itemValue)}
+      >
+        <Picker.Item label="Vowels" value="Vowels" />
+        <Picker.Item label="Consonants" value="Consonants" />
+      </Picker>
+
       <Button
         title="Submit"
         onPress={() => {
@@ -47,16 +47,5 @@ const styles = StyleSheet.create({
     borderColor: '#000',
   }
 });
-
-const pickerSelectStyles = {
-  inputIOS: {
-    borderWidth: 1,
-    borderColor: '#000',
-  },
-  inputAndroid: {
-    borderWidth: 1,
-    borderColor: '#000',
-  }
-};
 
 export default Add;

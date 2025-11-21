@@ -11,7 +11,6 @@ const Edit = ({ navigation, route}) => {
       <TextInput style={styles.input} maxLength={1} value={letter} onChangeText={setLetter} />
         <View style={{ flexDirection: 'row' }}>
         <View style={{ flex: 1, margin: 10 }}>
-            // Exercise 2D
             <Button title='Save'
             onPress={()=>{
             let indexnum = 1
